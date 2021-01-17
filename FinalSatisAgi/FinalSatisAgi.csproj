@@ -310,6 +310,9 @@
     <Content Include="Views\Musteri\SiparisTamamla.cshtml" />
     <Content Include="Views\Musteri\Siparislerim.cshtml" />
     <Content Include="Views\Firma\Siparislerim.cshtml" />
+    <Content Include="Views\YoneticiUser\Firma.cshtml" />
+    <Content Include="Views\YoneticiUser\Musteri.cshtml" />
+    <Content Include="Views\YoneticiUser\Yonetici.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

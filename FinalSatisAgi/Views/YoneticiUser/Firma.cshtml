@@ -1,0 +1,64 @@
+﻿@model IEnumerable< FinalSatisAgi.Models.Entity.USER>
+@{
+    ViewBag.Title = "Firma";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>FİRMA LİSTESİ</h2>
+<table class="table">
+    <tr>
+        <th>
+            <label>FİRMA ADI</label>
+        </th>
+        <th>
+            <label>FİRMA E-MAİL</label>
+        </th>
+        <th>
+            <label>FİRMA TELEFON</label>
+        </th>
+        <th>
+            <label>FİRMA ŞİFRE</label>
+        </th>
+        <th>
+            <label>FİRMA ADRES</label>
+        </th>
+        <th>
+            <label>FİRMA YETKİ</label>
+        </th>
+        <th>
+            <label>İŞLEMLER</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.user_ad)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user_mail)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user_telefon)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user_sifre)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.user_adres)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.YETKI.yetki_ad)
+    </td>
+    <td>
+        @Html.ActionLink("Düzenle", "Edit", new { id = item.user_id }) |
+        @Html.ActionLink("Detaylar", "Details", new { id = item.user_id }) |
+        @Html.ActionLink("Sil", "Delete", new { id = item.user_id })
+    </td>
+</tr>
+    }
+
+</table>
+

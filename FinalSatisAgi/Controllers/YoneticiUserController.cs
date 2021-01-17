@@ -128,5 +128,20 @@ namespace FinalSatisAgi.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Firma()
+        {
+            var firmalar = db.USER.Where(x=> x.user_yetki_id == 2).ToList();
+            return View(firmalar);
+        }
+        public ActionResult Musteri()
+        {
+            var firmalar = db.USER.Where(x => x.user_yetki_id == 3).ToList();
+            return View(firmalar);
+        }
+        public ActionResult Yonetici()
+        {
+            var firmalar = db.USER.Where(x => x.user_yetki_id == 1).ToList();
+            return View(firmalar);
+        }
     }
 }
