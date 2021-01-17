@@ -25,7 +25,7 @@ namespace FinalSatisAgi.Controllers
                 {
                     if (bilgiler.user_yetki_id == 1)
                     {
-                        Session["LoginYoneticiId"] = bilgiler.user_id;
+                        Session["LoginYoneticiId"] = bilgiler.user_id; // Giriş yapan yönetici bu şekilde tutulur
                         Session["LoginYonetici"] = bilgiler.user_ad;
                         return RedirectToAction("Index", "Yonetici");
                     }

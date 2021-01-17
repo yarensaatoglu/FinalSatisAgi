@@ -1,0 +1,41 @@
+﻿@model IEnumerable<FinalSatisAgi.Models.Entity.SIPARIS_K>
+@{
+    ViewBag.Title = "SiparisDetay";
+    Layout = "~/Views/Shared/_FirmaLayout.cshtml";
+}
+
+<h2>SİPARİŞ DETAY</h2>
+<table class="table">
+    <tr>
+        <th>
+            <label>ADET</label>
+        </th>
+        <th>
+            <label>TOPLAM TUTAR</label>
+        </th>
+        <th>
+            <label>ÜRÜN ADI</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_adet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_tutar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.URUN.urun_ad)
+            </td>
+
+        </tr>
+    }
+</table>
+<div>
+    <a>@Html.ActionLink("Listeye Geri Dön", "SiparisListele")</a>
+</div>
+

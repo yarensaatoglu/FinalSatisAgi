@@ -10,14 +10,14 @@ namespace FinalSatisAgi.Controllers
 {
     public class MusteriController : Controller
     {
-        DbSatisEntities1 db = new DbSatisEntities1();
+        DbSatisEntities1 db = new DbSatisEntities1(); // Veritabanı nesnesi oluşturulur.
         // GET: Musteri
-        public ActionResult Index()
+        public ActionResult Index() //Müşteri anasayfadır, ürünler listelenir
         {
             var urun = db.URUN.ToList();
             return View(urun);
         }
-        public ActionResult UrunDetaylar(int? id)
+        public ActionResult UrunDetaylar(int? id) // Ürün hakkında uzun açıklamalar yer alır
         {
             if (id == null)
             {
@@ -30,8 +30,9 @@ namespace FinalSatisAgi.Controllers
             }
             return View(urun);
         }
-        public ActionResult Profil()
+        public ActionResult Profil() //Müşteri kendi profil bilgilerini görür
         {
+            //Güvenlik Controller'ında girişte Session ile kullanıcı bilgisi tutulur burada da o bilgi kullanılır
             int userId = (int)Session["LoginMusteriId"];
             USER musteri = db.USER.Find(userId);
             if (musteri == null)
@@ -40,20 +41,19 @@ namespace FinalSatisAgi.Controllers
             }
             return View(musteri);
         }
-        public ActionResult Sepet()
+        public ActionResult Sepet() //Yine Session ile llogin yapmış Müşterinin sepeti gösterilir.
         {
             int userId = (int)Session["LoginMusteriId"];
             var sepet = db.SEPET.Where(x => x.sepet_user_id== userId);
             return View(sepet.ToList());
         }
-        public ActionResult SepetEkle(int? adet, int id)
+        public ActionResult SepetEkle(int? adet, int id) //Sepete ürün ekleme işlemi yapılır
         {
             if (Session["LoginMusteriId"] != null)
             {
                 int userId = (int)Session["LoginMusteriId"];
                 SEPET sepettekiUrun = db.SEPET.FirstOrDefault(x => x.sepet_urun_id == id && x.sepet_user_id == userId);
                 URUN urun = db.URUN.Find(id);
-                Console.Write("0000000000000000000000-" + userId);
                 if (sepettekiUrun == null)
                 {
                     SEPET yeniUrun = new SEPET();
@@ -73,7 +73,7 @@ namespace FinalSatisAgi.Controllers
             }
             return RedirectToAction("Index", "Musteri"); ;
         }
-        public ActionResult SepetGuncelle(int? adet, int id)
+        public ActionResult SepetGuncelle(int? adet, int id) // Sepet güncellede ürün sayısı güncellenir
         {
 
             SEPET sepet = db.SEPET.Find(id);
@@ -95,12 +95,12 @@ namespace FinalSatisAgi.Controllers
             db.SaveChanges();
             return RedirectToAction("Sepet");
         }
-        public ActionResult SiparisTamamla()
+        public ActionResult SiparisTamamla()// Siparis tamamlanır 
         {
             int userID = (int)Session["LoginMusteriId"];
             SIPARIS siparis = new SIPARIS()
             {
-                siparis_ad = Request.Form.Get("siparis_ad"),
+                siparis_ad = Request.Form.Get("siparis_ad"), // burada View tarfında girilen bilgiler çekilir
                 siparis_soyad = Request.Form.Get("siparis_soyad"),
                 siparis_adres = Request.Form.Get("siparis_adres"),
                 siparis_tarih = DateTime.Now,
@@ -129,6 +129,7 @@ namespace FinalSatisAgi.Controllers
             db.SaveChanges();
 
             return View();
+            //Bu kısım 3-d ödeme için yazılmıştır fakat banka bilgisi vs. olmadığı için aktif değildir.
             /*
             string ClientId = "100300000"; // Bankadan aldığınız mağaza kodu
             string Amount = sepetUrunleri.Sum(a => a.sepet_tutar).ToString(); // sepettteki ürünlerin toplam fiyatı
@@ -166,11 +167,11 @@ namespace FinalSatisAgi.Controllers
             */
 
         }
-        public ActionResult Tamamlandi()
+        public ActionResult Tamamlandi() // Ödeme tammalnadığında çalışır.
         {
             return View();
         }
-        public ActionResult Siparislerim()
+        public ActionResult Siparislerim() // Müşteri kendi siparişlerini listeler
         {
             var userId = (int)Session["LoginMusteriId"];
             var siparisler = db.SIPARIS.Where(x => x.siparis_user_id == userId).ToList();

@@ -314,6 +314,8 @@
     <Content Include="Views\YoneticiUser\Musteri.cshtml" />
     <Content Include="Views\YoneticiUser\Yonetici.cshtml" />
     <Content Include="Views\Yonetici\SiparisDetay.cshtml" />
+    <Content Include="Views\Firma\SiparisListele.cshtml" />
+    <Content Include="Views\Firma\SiparisDetay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

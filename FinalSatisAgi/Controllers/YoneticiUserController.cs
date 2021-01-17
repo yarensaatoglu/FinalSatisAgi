@@ -14,14 +14,12 @@ namespace FinalSatisAgi.Controllers
     {
         private DbSatisEntities1 db = new DbSatisEntities1();
 
-        // GET: YoneticiUser
         public ActionResult Index()
         {
             var uSER = db.USER.Include(u => u.YETKI);
             return View(uSER.ToList());
         }
 
-        // GET: YoneticiUser/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,16 +34,12 @@ namespace FinalSatisAgi.Controllers
             return View(uSER);
         }
 
-        // GET: YoneticiUser/Create
         public ActionResult Create()
         {
             ViewBag.user_yetki_id = new SelectList(db.YETKI, "yetki_id", "yetki_ad");
             return View();
         }
 
-        // POST: YoneticiUser/Create
-        // Aşırı gönderim saldırılarından korunmak için bağlamak istediğiniz belirli özellikleri etkinleştirin. 
-        // Daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "user_id,user_ad,user_soyad,user_mail,user_telefon,user_sifre,user_yetki_id,user_adres")] USER uSER)
@@ -60,8 +54,6 @@ namespace FinalSatisAgi.Controllers
             ViewBag.user_yetki_id = new SelectList(db.YETKI, "yetki_id", "yetki_ad", uSER.user_yetki_id);
             return View(uSER);
         }
-
-        // GET: YoneticiUser/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -77,10 +69,6 @@ namespace FinalSatisAgi.Controllers
             return View(uSER);
         }
 
-        // POST: YoneticiUser/Edit/5
-        // Aşırı gönderim saldırılarından korunmak için bağlamak istediğiniz belirli özellikleri etkinleştirin. 
-        // Daha fazla bilgi için bkz. https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "user_id,user_ad,user_soyad,user_mail,user_telefon,user_sifre,user_yetki_id,user_adres")] USER uSER)
         {
@@ -94,7 +82,6 @@ namespace FinalSatisAgi.Controllers
             return View(uSER);
         }
 
-        // GET: YoneticiUser/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -109,7 +96,6 @@ namespace FinalSatisAgi.Controllers
             return View(uSER);
         }
 
-        // POST: YoneticiUser/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
