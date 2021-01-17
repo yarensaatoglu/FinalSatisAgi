@@ -1,0 +1,55 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+@{
+    ViewBag.Title = "Profil";
+    Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+}
+
+<h2>PROFİLİM</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label>AD</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_ad)
+        </dd>
+
+        <dt>
+            <label>SOYAD</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_soyad)
+        </dd>
+
+        <dt>
+            <label>E-Mail</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_mail)
+        </dd>
+
+        <dt>
+            <label>TELEFON</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_telefon)
+        </dd>
+
+        <dt>
+            <label>ŞİFRE</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_sifre)
+        </dd>
+
+    </dl>
+</div>
+
+

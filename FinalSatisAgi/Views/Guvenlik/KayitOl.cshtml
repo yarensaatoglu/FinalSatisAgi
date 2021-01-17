@@ -1,0 +1,55 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+@{
+    ViewBag.Title = "KayitOl";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Yeni Hesap Oluştur</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="registration_left">
+        <h2>Kullanıcı Bilgileri</h2>
+        <div class="registration_form">
+
+            <form method="post">
+                <div>
+                    <label>
+                        <input placeholder="Adınızı giriniz..." type="text" tabindex="1" required="" autofocus="" name="user_ad">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Soyadınızı giriniz..." type="text" tabindex="2" required="" autofocus="" name="user_soyad">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="E-Mail adresi giriniz..." type="email" tabindex="3" required="" name="user_mail">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Telefon numaranızı giriniz..." type="text" tabindex="3" required="" name="user_telefon">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Şifre giriniz..." type="text" tabindex="4" required="" name="user_sifre">
+                    </label>
+                </div>
+                <div>
+                    <input type="submit" value="Hesabı Oluştur">
+                </div>
+                <div class="sky-form">
+                    <label class="checkbox"><input type="checkbox" name="checkbox"><i></i>i agree to shoppe.com &nbsp;<a class="terms" href="#"> terms of service</a> </label>
+                </div>
+                <div class="forget">
+                    <a href="/Guvenlik/GirisYap/">Hesabın var mı? Giriş Yap</a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+}
+

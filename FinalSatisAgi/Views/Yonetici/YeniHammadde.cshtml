@@ -1,0 +1,39 @@
+﻿@model FinalSatisAgi.Models.Entity.HAMMADDE
+@{
+    ViewBag.Title = "YeniHammadde";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>YENİ HAMMADDE EKLE</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Hammadde Adı @Html.EditorFor(model => model.hammadde_ad, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.hammadde_ad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Hammadde Stok Sayısı @Html.EditorFor(model => model.hammadde_stok, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.hammadde_stok, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+                @Html.ActionLink("Back to List", "Index")
+            </div>
+        </div>
+    </div>
+}
+
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="80d0ea055eb543e0aa44494677f1542b" Name="Diagram1">
+        <EntityTypeShape EntityType="DbSatisModel.BAKIM" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.HAMMADDE" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.SEPET" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.SIPARIS" Width="1.5" PointX="6" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.SIPARIS_K" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.URUN" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.USER" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DbSatisModel.YETKI" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="DbSatisModel.FK_URUN_BAKIM" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_URUN_HAMMADDE" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_SEPET_URUN" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_SEPET_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_SIPARIS_K_SIPARIS" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_SIPARIS_USER" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_SIPARIS_K_URUN" ManuallyRouted="false" />
+        <AssociationConnector Association="DbSatisModel.FK_USER_YETKI" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

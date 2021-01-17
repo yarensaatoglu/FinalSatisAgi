@@ -1,0 +1,57 @@
+﻿@model IEnumerable<FinalSatisAgi.Models.Entity.SEPET>
+@{
+    ViewBag.Title = "Sepet";
+    Layout = "~/Views/Shared/_FirmaLayout.cshtml";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            <label>Ürün Adı</label>
+        </th>
+        <th>
+            <label>Ürün Adet</label>
+        </th>
+        <th>
+            <label>Ürün Tutar</label>
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.URUN.urun_ad)
+            </td>
+            <td>
+                <form action="/Firma/SepetGuncelle">
+                    <input type="hidden" name="id" id=" id" value="@item.sepet_id" style="width:50px;" />
+                    <input type="number" name="adet" id="adet" value="@item.sepet_adet" style="width:50px;" /><input type="submit" id="gonder" value="Güncelle" />
+                </form>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sepet_tutar) TL
+            </td>
+            <td>
+                @Html.ActionLink("Sil", "SepetSil", new { id = item.sepet_id })
+            </td>
+        </tr>
+    }
+    <tr>
+        <th>
+            Toplam
+        </th>
+        <th>
+            @Model.Sum(a => a.sepet_adet)
+        </th>
+        <th>
+            @Model.Sum(a => a.sepet_tutar) TL
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td><a class="btn btn-default" href="@Url.Action("Urunler","Firma")">Alışverişe Devam Et</a></td>
+        <td colspan="3" style="text-align:right;"><a class="btn btn-default" href="@Url.Action("SiparisTamamla","Firma")">Alışverişi Tamamla</a></td>
+    </tr>
+</table>
+

@@ -1,0 +1,100 @@
+﻿@model FinalSatisAgi.Models.Entity.URUN
+@{
+    ViewBag.Title = "YeniUrun";
+    Layout = "~/Views/Shared/_FirmaLayout.cshtml";
+}
+
+<h3>YENİ ÜRÜN EKLE</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Adı @Html.EditorFor(model => model.urun_ad, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_ad, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Ebatı(en x boy) @Html.EditorFor(model => model.urun_ebat, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_ebat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label> Ürün Hammadde @Html.DropDownList("urun_hammadde_id", null, htmlAttributes: new { @class = "form-control" })</label>
+                @Html.ValidationMessageFor(model => model.urun_hammadde_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Bakım @Html.DropDownList("urun_bakim_id", null, htmlAttributes: new { @class = "form-control" })</label>
+                @Html.ValidationMessageFor(model => model.urun_bakim_id, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Üretici @Html.EditorFor(model => model.urun_uretici, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_uretici, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Fiyat @Html.EditorFor(model => model.urun_fiyat, new { htmlAttributes = new { @class = "form-control" } }) </label>
+                @Html.ValidationMessageFor(model => model.urun_fiyat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Teminat Süresi (Gün Sayısı Giriniz) @Html.EditorFor(model => model.urun_teminat, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_teminat, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Resim <input type="file" id="UrunResim" name="UrunResim" class="form-control" /></label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Kısa Açıklama @Html.EditorFor(model => model.urun_kisa_aciklama, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_kisa_aciklama, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Uzun Açıklama @Html.EditorFor(model => model.urun_uzun_aciklama, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_uzun_aciklama, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <label>Ürün Stok Sayısı @Html.EditorFor(model => model.urun_stok, new { htmlAttributes = new { @class = "form-control" } })</label>
+                @Html.ValidationMessageFor(model => model.urun_stok, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Kaydet" class="btn btn-default" />
+                @Html.ActionLink("Listeye Geri Dön", "Urunler")
+            </div>
+        </div>
+    </div>
+}
+

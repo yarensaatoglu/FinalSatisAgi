@@ -1,0 +1,31 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+@{
+    ViewBag.Title = "GirisYap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Giriş Yap</h2>
+
+<div class="registration_left">
+    <h2>Kullanıcı Bilgileri</h2>
+    <div class="registration_form">
+        <form method="post">
+            <div>
+                <label>
+                    <input placeholder="E-Mail adresinizi giriniz..." type="email" tabindex="3" required="" name="user_mail">
+                </label>
+            </div>
+            <div>
+                <label>
+                    <input placeholder="Şifrenizi giriniz..." type="password" tabindex="4" required="" name="user_sifre">
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="Giriş Yap">
+            </div>
+            <div class="forget">
+                <a href="/Guvenlik/KayitOl/">Üye değil misin? Kayıt ol</a>
+            </div>
+        </form>
+    </div>
+</div>

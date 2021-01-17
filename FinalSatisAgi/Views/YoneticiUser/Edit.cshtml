@@ -1,0 +1,75 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>KULLANICI DÜZENLE</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.user_id)
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kullanıcı Adı @Html.EditorFor(model => model.user_ad, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_ad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kulanıcı Soyadı @Html.EditorFor(model => model.user_soyad, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_soyad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kullanıcı E-Mail @Html.EditorFor(model => model.user_mail, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_mail, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kullanıcı Telefon @Html.EditorFor(model => model.user_telefon, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_telefon, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kullanıcı Adres @Html.EditorFor(model => model.user_adres, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_adres, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Kullanıcı Şifre @Html.EditorFor(model => model.user_sifre, new { htmlAttributes = new { @class = "form-control" } })</label>
+            @Html.ValidationMessageFor(model => model.user_sifre, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <label>Yetki @Html.DropDownList("user_yetki_id", null, htmlAttributes: new { @class = "form-control" })</label>
+            @Html.ValidationMessageFor(model => model.user_yetki_id, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Kaydet" class="btn btn-default" /> |
+        @Html.ActionLink("Listeye Geri Dön", "Index")
+    </div>
+
+</div>
+}
+

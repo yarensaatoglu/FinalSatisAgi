@@ -1,0 +1,30 @@
+﻿@model FinalSatisAgi.Models.Entity.URUN
+@{
+    ViewBag.Title = "UrunDetaylar";
+    Layout = "~/Views/Shared/_MusteriLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <h3><b><i>ÜRÜN ADI</i></b></h3>
+        <h4>@Model.urun_ad</h4>
+        <div class="row">
+            <div class="col-md-6"> <img src="~/Resim/resim.jpg" style="max-width:100%" /></div>
+            <div class="col-md-6">
+                Ürün Fiyatı: <span>@Model.urun_fiyat TL</span><br />
+                <form action="/Musteri/SepetEkle">
+                    <input type="hidden" name="id" id="id" value="@Model.urun_id" style="width:50px;" />
+                    <input type="number" name="adet" id="adet" value="1" style="width:50px;" /><input type="submit" id="gonder" value="Sepete Ekle" />
+                </form>
+                <span>@Model.urun_kisa_aciklama</span>
+                <span>@Model.urun_ebat</span>
+                Ürün Hammadde: <span>@Model.HAMMADDE.hammadde_ad</span>
+                Ürün Bakım : <span>@Model.BAKIM.bakim_ad</span>
+            </div>
+        </div>
+        <h3><b><i>ÜRÜN AÇIKLAMASI</i></b></h3>
+        <p>@MvcHtmlString.Create(Model.urun_uzun_aciklama)</p>
+    </div>
+
+</div>
+

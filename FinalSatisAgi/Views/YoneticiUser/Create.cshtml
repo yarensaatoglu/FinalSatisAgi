@@ -1,0 +1,67 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>YENİ KULLANICI EKLE</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="registration_left">
+
+        <div class="registration_form">
+
+            <form method="post">
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı adı giriniz..." type="text" tabindex="1" required="" autofocus="" name="user_ad">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı soyadı giriniz..." type="text" tabindex="2" required="" autofocus="" name="user_soyad">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı E-Mail adresi giriniz..." type="email" tabindex="3" required="" name="user_mail">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı adresi giriniz..." type="text" tabindex="3" required="" name="user_adres">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı telefon numarası giriniz..." type="text" tabindex="3" required="" name="user_telefon">
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <input placeholder="Kullanıcı şifre giriniz..." type="password" tabindex="4" required="" name="user_sifre">
+                    </label>
+                </div>
+                <div class="sky-form">
+                    <div class="sky_form1">
+                        <ul>
+                            <li><label class="radio left"><input type="radio" name="radio" checked="" dirname="user_yetki_id"><i></i>Müşteri</label></li>
+                            <li><label class="radio"><input type="radio" name="radio" dirname="user_yetki_id"><i></i>Firma</label></li>
+                            <li><label class="radio right"><input type="radio" name="radio" dirname="user_yetki_id"><i></i>Yönetici</label></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="Kaydet">
+                </div>
+                <div>
+                    @Html.ActionLink("Listeye Geri Dön", "Index")
+                </div>
+            </form>
+
+        </div>
+    </div>
+}

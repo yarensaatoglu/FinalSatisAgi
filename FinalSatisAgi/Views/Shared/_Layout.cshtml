@@ -1,0 +1,124 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Satış Ağı</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <link href="~/web/css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+    <link href="~/web/css/style.css" rel='stylesheet' type='text/css' />
+    <link href="~/web/css/font-awesome.css" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Roboto:700,500,300,100italic,100,400' rel='stylesheet' type='text/css' />
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="~/web/css/icon-font.min.css" type='text/css' />
+    <script src="~/web/js/simpleCart.min.js"></script>
+    <script src="~/web/js/amcharts.js"></script>
+    <script src="~/web/js/serial.js"></script>
+    <script src="~/web/js/light.js"></script>
+    <script src="~/web/js/jquery-1.10.2.min.js"></script>
+    <script src="~/web/js/pie-chart.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="page-container">
+        <div class="left-content">
+            <div class="inner-content">
+                <div class="header-section">
+                    <div class="top_bg">
+                        <div class="header_top">
+                            <div class="top_right">
+                                <ul>
+                                    <li><a href="/Home/Hakkında">Yardım</a></li>|
+                                    <li><a href="/Home/Hakkında">İletişim</a></li>|
+                                    <li><a href="/Home/Hakkında">Hakkında</a></li>
+                                </ul>
+                            </div>
+                            <div class="top_left">
+                                <h2><span></span> Bizi Arayın : 00000000009</h2>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="header_bg">
+                    <div class="header">
+                        <div class="head-t">
+                            <div class="logo">
+                                <a href="/Home/Index"><img src="~/Resim/logo.png" class="img-responsive" alt=""> </a>
+                            </div>
+                            <div class="header_right">
+                                <div class="rgt-bottom">
+                                    <div class="reg">
+                                        <a href="/Guvenlik/GirisYap/">GİRİŞ YAP</a>
+                                    </div>
+                                    <div class="reg">
+                                        <a href="/Guvenlik/KayitOl/">KAYIT OL</a>
+                                    </div>
+                                    <div class="cart box_1">
+                                        <a href="/Guvenlik/GirisYap">
+                                            <h3> <span>---------------------</span><span ></span> <img src="~/Resim/bag.png" alt=""></h3>
+                                        </a>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                    <div class="create_btn">
+                                        <a href="/Guvenlik/GirisYap/">SEPETİM</a>
+                                    </div>
+                                    <div class="clearfix"> </div>
+                                </div>
+                                <div class="search">
+                                    <form>
+                                        <input type="text" value="" placeholder="search...">
+                                        <input type="submit" value="">
+                                    </form>
+                                </div>
+                                <div class="clearfix"> </div>
+                            </div>
+                            <div class="clearfix"> </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- //header-ends -->
+                <!--content-->
+                <div class="content">
+                    <div class="women_main">
+                        <!-- start content -->
+                        @RenderBody()
+                        <!-- end content -->
+                        
+                        <div class="modal-footer">
+                            <div class="clearfix"> </div>
+                            <p>© 2020 Firma Satış Ağı </p>
+                        </div>
+                    </div>
+                </div>
+                <!--content-->
+            </div>
+        </div>
+        <div class="sidebar-menu">
+            <header class="logo1">
+                <a href="#" class="sidebar-icon"> <span class="fa fa-bars"></span> </a>
+            </header>
+        </div>
+
+        <script>
+            var toggle = true;
+
+            $(".sidebar-icon").click(function () {
+                if (toggle) {
+                    $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+                    $("#menu span").css({ "position": "absolute" });
+                }
+                else {
+                    $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+                    setTimeout(function () {
+                        $("#menu span").css({ "position": "relative" });
+                    }, 400);
+                }
+
+                toggle = !toggle;
+            });
+        </script>
+    </div>
+</body>
+</html>

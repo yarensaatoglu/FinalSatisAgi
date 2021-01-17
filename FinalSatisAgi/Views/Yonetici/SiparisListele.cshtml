@@ -1,0 +1,63 @@
+﻿@model IEnumerable<FinalSatisAgi.Models.Entity.SIPARIS>
+@{
+    ViewBag.Title = "SiparisListele";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<table class="table">
+    <tr>
+
+        <th>
+            <label>Sipariş Ad-Soyad</label>
+        </th>
+        <th>
+            <label>Sipariş Adresi</label>
+        </th>
+        <th>
+            <label>Sipariş Telefon</label>
+        </th>
+        <th>
+            <label>Sipariş Tc</label>
+        </th>
+        <th>
+            <label>Sipariş Tarih</label>
+        </th>
+        <th>
+            Ürün Adet
+        </th>
+        <th>Toplam Tutar</th>
+        <th> Sipariş Detay</th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_ad)
+
+                @Html.DisplayFor(modelItem => item.siparis_soyad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_adres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_telefon)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_tc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.siparis_tarih)
+            </td>
+            <td>
+                @item.SIPARIS_K.Sum(a => a.siparis_adet)
+            </td>
+            <td>@item.SIPARIS_K.Sum(a => a.siparis_tutar)</td>
+
+            <td>@Html.ActionLink("Sipariş Detay", "SiparisDetay", new { siparisID = item.siparis_id })</td>
+        </tr>
+    }
+
+</table>

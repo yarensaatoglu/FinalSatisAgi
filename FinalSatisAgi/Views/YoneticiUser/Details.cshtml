@@ -1,0 +1,66 @@
+﻿@model FinalSatisAgi.Models.Entity.USER
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>KULLANICI DETAYLAR</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label>Kullanıcı Adı:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_ad)
+        </dd>
+
+        <dt>
+            <label>Kullanıcı Soyadı:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_soyad)
+        </dd>
+
+        <dt>
+            <lable>Kullanıcı E-Mail:</lable>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_mail)
+        </dd>
+
+        <dt>
+            <label>Kullanıcı Telefon:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_telefon)
+        </dd>
+
+        <dt>
+            <label>Kullanıcı Adres:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.user_adres)
+        </dd>
+
+        <dt>
+            <label>Kullanıcı Yetki:</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.YETKI.yetki_ad)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Düzenle", "Edit", new { id = Model.user_id }) |
+    @Html.ActionLink("Listeye Geri Dön", "Index")
+</p>

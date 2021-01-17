@@ -1,0 +1,40 @@
+﻿@model IEnumerable<FinalSatisAgi.Models.Entity.HAMMADDE>
+@{
+    ViewBag.Title = "Hammadde";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h2>HAMMADDELER</h2>
+
+<p>
+    @Html.ActionLink("YENİ HAMMADDE EKLE", "YeniHammadde")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            <label>Hammadde Adı</label>
+        </th>
+        <th>
+            <label>Hammadde Stok</label>
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hammadde_ad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.hammadde_stok)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "HammaddeDuzenle", new { id = item.hammadde_id }) |
+                @Html.ActionLink("Sil", "HammaddeSil", new { id = item.hammadde_id })
+            </td>
+        </tr>
+    }
+
+</table>
+

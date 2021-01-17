@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DbSatisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BAKIM">
+          <Key>
+            <PropertyRef Name="bakim_id" />
+          </Key>
+          <Property Name="bakim_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bakim_ad" Type="varchar" MaxLength="50" />
+          <Property Name="bakim_sure" Type="int" />
+          <Property Name="bakim_aciklama" Type="varchar(max)" />
+          <Property Name="bakim_tutar" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="HAMMADDE">
+          <Key>
+            <PropertyRef Name="hammadde_id" />
+          </Key>
+          <Property Name="hammadde_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hammadde_ad" Type="varchar" MaxLength="50" />
+          <Property Name="hammadde_stok" Type="int" />
+        </EntityType>
+        <EntityType Name="SEPET">
+          <Key>
+            <PropertyRef Name="sepet_id" />
+          </Key>
+          <Property Name="sepet_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sepet_user_id" Type="int" />
+          <Property Name="sepet_urun_id" Type="int" />
+          <Property Name="sepet_adet" Type="int" />
+          <Property Name="sepet_tutar" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SIPARIS">
+          <Key>
+            <PropertyRef Name="siparis_id" />
+          </Key>
+          <Property Name="siparis_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siparis_ad" Type="varchar" MaxLength="50" />
+          <Property Name="siparis_soyad" Type="varchar" MaxLength="50" />
+          <Property Name="siparis_user_id" Type="int" />
+          <Property Name="siparis_telefon" Type="varchar" MaxLength="11" />
+          <Property Name="siparis_adres" Type="varchar(max)" />
+          <Property Name="siparis_tc" Type="varchar" MaxLength="11" />
+          <Property Name="siparis_tarih" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SIPARIS_K">
+          <Key>
+            <PropertyRef Name="siparis_k_id" />
+          </Key>
+          <Property Name="siparis_k_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="siparis_k_siparis_id" Type="int" />
+          <Property Name="siparis_k_urun_id" Type="int" />
+          <Property Name="siparis_adet" Type="int" />
+          <Property Name="siparis_tutar" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="URUN">
+          <Key>
+            <PropertyRef Name="urun_id" />
+          </Key>
+          <Property Name="urun_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urun_ad" Type="varchar" MaxLength="50" />
+          <Property Name="urun_ebat" Type="varchar" MaxLength="50" />
+          <Property Name="urun_hammadde_id" Type="int" />
+          <Property Name="urun_bakim_id" Type="int" />
+          <Property Name="urun_uretici" Type="varchar" MaxLength="50" />
+          <Property Name="urun_fiyat" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="urun_kisa_aciklama" Type="varchar" MaxLength="150" />
+          <Property Name="urun_uzun_aciklama" Type="varchar(max)" />
+          <Property Name="urun_teminat" Type="varchar" MaxLength="50" />
+          <Property Name="urun_stok" Type="int" />
+          <Property Name="urun_resim" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="user_ad" Type="varchar" MaxLength="50" />
+          <Property Name="user_soyad" Type="varchar" MaxLength="50" />
+          <Property Name="user_mail" Type="varchar" MaxLength="50" />
+          <Property Name="user_telefon" Type="varchar" MaxLength="11" />
+          <Property Name="user_sifre" Type="varchar" MaxLength="50" />
+          <Property Name="user_yetki_id" Type="int" />
+          <Property Name="user_adres" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="YETKI">
+          <Key>
+            <PropertyRef Name="yetki_id" />
+          </Key>
+          <Property Name="yetki_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="yetki_ad" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_SEPET_URUN">
+          <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
+          <End Role="SEPET" Type="Self.SEPET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUN">
+              <PropertyRef Name="urun_id" />
+            </Principal>
+            <Dependent Role="SEPET">
+              <PropertyRef Name="sepet_urun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPET_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SEPET" Type="Self.SEPET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="SEPET">
+              <PropertyRef Name="sepet_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_K_SIPARIS">
+          <End Role="SIPARIS" Type="Self.SIPARIS" Multiplicity="0..1" />
+          <End Role="SIPARIS_K" Type="Self.SIPARIS_K" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIPARIS">
+              <PropertyRef Name="siparis_id" />
+            </Principal>
+            <Dependent Role="SIPARIS_K">
+              <PropertyRef Name="siparis_k_siparis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_K_URUN">
+          <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
+          <End Role="SIPARIS_K" Type="Self.SIPARIS_K" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUN">
+              <PropertyRef Name="urun_id" />
+            </Principal>
+            <Dependent Role="SIPARIS_K">
+              <PropertyRef Name="siparis_k_urun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SIPARIS" Type="Self.SIPARIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="SIPARIS">
+              <PropertyRef Name="siparis_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_URUN_BAKIM">
+          <End Role="BAKIM" Type="Self.BAKIM" Multiplicity="0..1" />
+          <End Role="URUN" Type="Self.URUN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAKIM">
+              <PropertyRef Name="bakim_id" />
+            </Principal>
+            <Dependent Role="URUN">
+              <PropertyRef Name="urun_bakim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_URUN_HAMMADDE">
+          <End Role="HAMMADDE" Type="Self.HAMMADDE" Multiplicity="0..1" />
+          <End Role="URUN" Type="Self.URUN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HAMMADDE">
+              <PropertyRef Name="hammadde_id" />
+            </Principal>
+            <Dependent Role="URUN">
+              <PropertyRef Name="urun_hammadde_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_YETKI">
+          <End Role="YETKI" Type="Self.YETKI" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YETKI">
+              <PropertyRef Name="yetki_id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="user_yetki_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbSatisModelStoreContainer">
+          <EntitySet Name="BAKIM" EntityType="Self.BAKIM" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HAMMADDE" EntityType="Self.HAMMADDE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SEPET" EntityType="Self.SEPET" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIPARIS" EntityType="Self.SIPARIS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SIPARIS_K" EntityType="Self.SIPARIS_K" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="URUN" EntityType="Self.URUN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USER" EntityType="Self.USER" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="YETKI" EntityType="Self.YETKI" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_SEPET_URUN" Association="Self.FK_SEPET_URUN">
+            <End Role="URUN" EntitySet="URUN" />
+            <End Role="SEPET" EntitySet="SEPET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPET_USER" Association="Self.FK_SEPET_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SEPET" EntitySet="SEPET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_K_SIPARIS" Association="Self.FK_SIPARIS_K_SIPARIS">
+            <End Role="SIPARIS" EntitySet="SIPARIS" />
+            <End Role="SIPARIS_K" EntitySet="SIPARIS_K" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_K_URUN" Association="Self.FK_SIPARIS_K_URUN">
+            <End Role="URUN" EntitySet="URUN" />
+            <End Role="SIPARIS_K" EntitySet="SIPARIS_K" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_USER" Association="Self.FK_SIPARIS_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SIPARIS" EntitySet="SIPARIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_URUN_BAKIM" Association="Self.FK_URUN_BAKIM">
+            <End Role="BAKIM" EntitySet="BAKIM" />
+            <End Role="URUN" EntitySet="URUN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_URUN_HAMMADDE" Association="Self.FK_URUN_HAMMADDE">
+            <End Role="HAMMADDE" EntitySet="HAMMADDE" />
+            <End Role="URUN" EntitySet="URUN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_YETKI" Association="Self.FK_USER_YETKI">
+            <End Role="YETKI" EntitySet="YETKI" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DbSatisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BAKIM">
+          <Key>
+            <PropertyRef Name="bakim_id" />
+          </Key>
+          <Property Name="bakim_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bakim_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bakim_sure" Type="Int32" />
+          <Property Name="bakim_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="bakim_tutar" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="URUN" Relationship="Self.FK_URUN_BAKIM" FromRole="BAKIM" ToRole="URUN" />
+        </EntityType>
+        <EntityType Name="HAMMADDE">
+          <Key>
+            <PropertyRef Name="hammadde_id" />
+          </Key>
+          <Property Name="hammadde_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hammadde_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="hammadde_stok" Type="Int32" />
+          <NavigationProperty Name="URUN" Relationship="Self.FK_URUN_HAMMADDE" FromRole="HAMMADDE" ToRole="URUN" />
+        </EntityType>
+        <EntityType Name="SEPET">
+          <Key>
+            <PropertyRef Name="sepet_id" />
+          </Key>
+          <Property Name="sepet_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sepet_user_id" Type="Int32" />
+          <Property Name="sepet_urun_id" Type="Int32" />
+          <Property Name="sepet_adet" Type="Int32" />
+          <Property Name="sepet_tutar" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="URUN" Relationship="Self.FK_SEPET_URUN" FromRole="SEPET" ToRole="URUN" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_SEPET_USER" FromRole="SEPET" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="SIPARIS">
+          <Key>
+            <PropertyRef Name="siparis_id" />
+          </Key>
+          <Property Name="siparis_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siparis_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="siparis_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="siparis_user_id" Type="Int32" />
+          <Property Name="siparis_telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="siparis_adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="siparis_tc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="siparis_tarih" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="SIPARIS_K" Relationship="Self.FK_SIPARIS_K_SIPARIS" FromRole="SIPARIS" ToRole="SIPARIS_K" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_SIPARIS_USER" FromRole="SIPARIS" ToRole="USER" />
+        </EntityType>
+        <EntityType Name="SIPARIS_K">
+          <Key>
+            <PropertyRef Name="siparis_k_id" />
+          </Key>
+          <Property Name="siparis_k_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="siparis_k_siparis_id" Type="Int32" />
+          <Property Name="siparis_k_urun_id" Type="Int32" />
+          <Property Name="siparis_adet" Type="Int32" />
+          <Property Name="siparis_tutar" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="SIPARIS" Relationship="Self.FK_SIPARIS_K_SIPARIS" FromRole="SIPARIS_K" ToRole="SIPARIS" />
+          <NavigationProperty Name="URUN" Relationship="Self.FK_SIPARIS_K_URUN" FromRole="SIPARIS_K" ToRole="URUN" />
+        </EntityType>
+        <EntityType Name="URUN">
+          <Key>
+            <PropertyRef Name="urun_id" />
+          </Key>
+          <Property Name="urun_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urun_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urun_ebat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urun_hammadde_id" Type="Int32" />
+          <Property Name="urun_bakim_id" Type="Int32" />
+          <Property Name="urun_uretici" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urun_fiyat" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="urun_kisa_aciklama" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="urun_uzun_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="urun_teminat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="urun_stok" Type="Int32" />
+          <Property Name="urun_resim" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BAKIM" Relationship="Self.FK_URUN_BAKIM" FromRole="URUN" ToRole="BAKIM" />
+          <NavigationProperty Name="HAMMADDE" Relationship="Self.FK_URUN_HAMMADDE" FromRole="URUN" ToRole="HAMMADDE" />
+          <NavigationProperty Name="SEPET" Relationship="Self.FK_SEPET_URUN" FromRole="URUN" ToRole="SEPET" />
+          <NavigationProperty Name="SIPARIS_K" Relationship="Self.FK_SIPARIS_K_URUN" FromRole="URUN" ToRole="SIPARIS_K" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="user_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="user_ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_telefon" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="user_sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="user_yetki_id" Type="Int32" />
+          <Property Name="user_adres" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SEPET" Relationship="Self.FK_SEPET_USER" FromRole="USER" ToRole="SEPET" />
+          <NavigationProperty Name="SIPARIS" Relationship="Self.FK_SIPARIS_USER" FromRole="USER" ToRole="SIPARIS" />
+          <NavigationProperty Name="YETKI" Relationship="Self.FK_USER_YETKI" FromRole="USER" ToRole="YETKI" />
+        </EntityType>
+        <EntityType Name="YETKI">
+          <Key>
+            <PropertyRef Name="yetki_id" />
+          </Key>
+          <Property Name="yetki_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="yetki_ad" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USER_YETKI" FromRole="YETKI" ToRole="USER" />
+        </EntityType>
+        <Association Name="FK_URUN_BAKIM">
+          <End Role="BAKIM" Type="Self.BAKIM" Multiplicity="0..1" />
+          <End Role="URUN" Type="Self.URUN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BAKIM">
+              <PropertyRef Name="bakim_id" />
+            </Principal>
+            <Dependent Role="URUN">
+              <PropertyRef Name="urun_bakim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_URUN_HAMMADDE">
+          <End Role="HAMMADDE" Type="Self.HAMMADDE" Multiplicity="0..1" />
+          <End Role="URUN" Type="Self.URUN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HAMMADDE">
+              <PropertyRef Name="hammadde_id" />
+            </Principal>
+            <Dependent Role="URUN">
+              <PropertyRef Name="urun_hammadde_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPET_URUN">
+          <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
+          <End Role="SEPET" Type="Self.SEPET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUN">
+              <PropertyRef Name="urun_id" />
+            </Principal>
+            <Dependent Role="SEPET">
+              <PropertyRef Name="sepet_urun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SEPET_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SEPET" Type="Self.SEPET" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="SEPET">
+              <PropertyRef Name="sepet_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_K_SIPARIS">
+          <End Role="SIPARIS" Type="Self.SIPARIS" Multiplicity="0..1" />
+          <End Role="SIPARIS_K" Type="Self.SIPARIS_K" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIPARIS">
+              <PropertyRef Name="siparis_id" />
+            </Principal>
+            <Dependent Role="SIPARIS_K">
+              <PropertyRef Name="siparis_k_siparis_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_USER">
+          <End Role="USER" Type="Self.USER" Multiplicity="0..1" />
+          <End Role="SIPARIS" Type="Self.SIPARIS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USER">
+              <PropertyRef Name="user_id" />
+            </Principal>
+            <Dependent Role="SIPARIS">
+              <PropertyRef Name="siparis_user_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIPARIS_K_URUN">
+          <End Role="URUN" Type="Self.URUN" Multiplicity="0..1" />
+          <End Role="SIPARIS_K" Type="Self.SIPARIS_K" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="URUN">
+              <PropertyRef Name="urun_id" />
+            </Principal>
+            <Dependent Role="SIPARIS_K">
+              <PropertyRef Name="siparis_k_urun_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USER_YETKI">
+          <End Role="YETKI" Type="Self.YETKI" Multiplicity="0..1" />
+          <End Role="USER" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YETKI">
+              <PropertyRef Name="yetki_id" />
+            </Principal>
+            <Dependent Role="USER">
+              <PropertyRef Name="user_yetki_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DbSatisEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BAKIM" EntityType="Self.BAKIM" />
+          <EntitySet Name="HAMMADDE" EntityType="Self.HAMMADDE" />
+          <EntitySet Name="SEPET" EntityType="Self.SEPET" />
+          <EntitySet Name="SIPARIS" EntityType="Self.SIPARIS" />
+          <EntitySet Name="SIPARIS_K" EntityType="Self.SIPARIS_K" />
+          <EntitySet Name="URUN" EntityType="Self.URUN" />
+          <EntitySet Name="USER" EntityType="Self.USER" />
+          <EntitySet Name="YETKI" EntityType="Self.YETKI" />
+          <AssociationSet Name="FK_URUN_BAKIM" Association="Self.FK_URUN_BAKIM">
+            <End Role="BAKIM" EntitySet="BAKIM" />
+            <End Role="URUN" EntitySet="URUN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_URUN_HAMMADDE" Association="Self.FK_URUN_HAMMADDE">
+            <End Role="HAMMADDE" EntitySet="HAMMADDE" />
+            <End Role="URUN" EntitySet="URUN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPET_URUN" Association="Self.FK_SEPET_URUN">
+            <End Role="URUN" EntitySet="URUN" />
+            <End Role="SEPET" EntitySet="SEPET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SEPET_USER" Association="Self.FK_SEPET_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SEPET" EntitySet="SEPET" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_K_SIPARIS" Association="Self.FK_SIPARIS_K_SIPARIS">
+            <End Role="SIPARIS" EntitySet="SIPARIS" />
+            <End Role="SIPARIS_K" EntitySet="SIPARIS_K" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_USER" Association="Self.FK_SIPARIS_USER">
+            <End Role="USER" EntitySet="USER" />
+            <End Role="SIPARIS" EntitySet="SIPARIS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIPARIS_K_URUN" Association="Self.FK_SIPARIS_K_URUN">
+            <End Role="URUN" EntitySet="URUN" />
+            <End Role="SIPARIS_K" EntitySet="SIPARIS_K" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USER_YETKI" Association="Self.FK_USER_YETKI">
+            <End Role="YETKI" EntitySet="YETKI" />
+            <End Role="USER" EntitySet="USER" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DbSatisModelStoreContainer" CdmEntityContainer="DbSatisEntities1">
+          <EntitySetMapping Name="BAKIM">
+            <EntityTypeMapping TypeName="DbSatisModel.BAKIM">
+              <MappingFragment StoreEntitySet="BAKIM">
+                <ScalarProperty Name="bakim_id" ColumnName="bakim_id" />
+                <ScalarProperty Name="bakim_ad" ColumnName="bakim_ad" />
+                <ScalarProperty Name="bakim_sure" ColumnName="bakim_sure" />
+                <ScalarProperty Name="bakim_aciklama" ColumnName="bakim_aciklama" />
+                <ScalarProperty Name="bakim_tutar" ColumnName="bakim_tutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HAMMADDE">
+            <EntityTypeMapping TypeName="DbSatisModel.HAMMADDE">
+              <MappingFragment StoreEntitySet="HAMMADDE">
+                <ScalarProperty Name="hammadde_id" ColumnName="hammadde_id" />
+                <ScalarProperty Name="hammadde_ad" ColumnName="hammadde_ad" />
+                <ScalarProperty Name="hammadde_stok" ColumnName="hammadde_stok" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SEPET">
+            <EntityTypeMapping TypeName="DbSatisModel.SEPET">
+              <MappingFragment StoreEntitySet="SEPET">
+                <ScalarProperty Name="sepet_id" ColumnName="sepet_id" />
+                <ScalarProperty Name="sepet_user_id" ColumnName="sepet_user_id" />
+                <ScalarProperty Name="sepet_urun_id" ColumnName="sepet_urun_id" />
+                <ScalarProperty Name="sepet_adet" ColumnName="sepet_adet" />
+                <ScalarProperty Name="sepet_tutar" ColumnName="sepet_tutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIPARIS">
+            <EntityTypeMapping TypeName="DbSatisModel.SIPARIS">
+              <MappingFragment StoreEntitySet="SIPARIS">
+                <ScalarProperty Name="siparis_id" ColumnName="siparis_id" />
+                <ScalarProperty Name="siparis_ad" ColumnName="siparis_ad" />
+                <ScalarProperty Name="siparis_soyad" ColumnName="siparis_soyad" />
+                <ScalarProperty Name="siparis_user_id" ColumnName="siparis_user_id" />
+                <ScalarProperty Name="siparis_telefon" ColumnName="siparis_telefon" />
+                <ScalarProperty Name="siparis_adres" ColumnName="siparis_adres" />
+                <ScalarProperty Name="siparis_tc" ColumnName="siparis_tc" />
+                <ScalarProperty Name="siparis_tarih" ColumnName="siparis_tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SIPARIS_K">
+            <EntityTypeMapping TypeName="DbSatisModel.SIPARIS_K">
+              <MappingFragment StoreEntitySet="SIPARIS_K">
+                <ScalarProperty Name="siparis_k_id" ColumnName="siparis_k_id" />
+                <ScalarProperty Name="siparis_k_siparis_id" ColumnName="siparis_k_siparis_id" />
+                <ScalarProperty Name="siparis_k_urun_id" ColumnName="siparis_k_urun_id" />
+                <ScalarProperty Name="siparis_adet" ColumnName="siparis_adet" />
+                <ScalarProperty Name="siparis_tutar" ColumnName="siparis_tutar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="URUN">
+            <EntityTypeMapping TypeName="DbSatisModel.URUN">
+              <MappingFragment StoreEntitySet="URUN">
+                <ScalarProperty Name="urun_id" ColumnName="urun_id" />
+                <ScalarProperty Name="urun_ad" ColumnName="urun_ad" />
+                <ScalarProperty Name="urun_ebat" ColumnName="urun_ebat" />
+                <ScalarProperty Name="urun_hammadde_id" ColumnName="urun_hammadde_id" />
+                <ScalarProperty Name="urun_bakim_id" ColumnName="urun_bakim_id" />
+                <ScalarProperty Name="urun_uretici" ColumnName="urun_uretici" />
+                <ScalarProperty Name="urun_fiyat" ColumnName="urun_fiyat" />
+                <ScalarProperty Name="urun_kisa_aciklama" ColumnName="urun_kisa_aciklama" />
+                <ScalarProperty Name="urun_uzun_aciklama" ColumnName="urun_uzun_aciklama" />
+                <ScalarProperty Name="urun_teminat" ColumnName="urun_teminat" />
+                <ScalarProperty Name="urun_stok" ColumnName="urun_stok" />
+                <ScalarProperty Name="urun_resim" ColumnName="urun_resim" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USER">
+            <EntityTypeMapping TypeName="DbSatisModel.USER">
+              <MappingFragment StoreEntitySet="USER">
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="user_ad" ColumnName="user_ad" />
+                <ScalarProperty Name="user_soyad" ColumnName="user_soyad" />
+                <ScalarProperty Name="user_mail" ColumnName="user_mail" />
+                <ScalarProperty Name="user_telefon" ColumnName="user_telefon" />
+                <ScalarProperty Name="user_sifre" ColumnName="user_sifre" />
+                <ScalarProperty Name="user_yetki_id" ColumnName="user_yetki_id" />
+                <ScalarProperty Name="user_adres" ColumnName="user_adres" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="YETKI">
+            <EntityTypeMapping TypeName="DbSatisModel.YETKI">
+              <MappingFragment StoreEntitySet="YETKI">
+                <ScalarProperty Name="yetki_id" ColumnName="yetki_id" />
+                <ScalarProperty Name="yetki_ad" ColumnName="yetki_ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

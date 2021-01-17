@@ -1,0 +1,105 @@
+﻿@model FinalSatisAgi.Models.Entity.URUN
+@{
+    ViewBag.Title = "UrunSil";
+    Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
+}
+
+<h3>ÜRÜN SİL</h3>
+
+<h4>Silmek istediğinize emin misiniz ?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            <label>Ürün Adı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_ad)
+        </dd>
+
+        <dt>
+            <label>Ürün Ebatı</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_ebat)
+        </dd>
+
+        <dt>
+            <label>Ürün Üretici</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_uretici)
+        </dd>
+
+        <dt>
+            <label>Ürün Fiyat</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_fiyat)
+        </dd>
+
+        <dt>
+            <label>Ürün Teminat</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_teminat)
+        </dd>
+
+        <dt>
+            <label>Ürün Kısa Açıklama</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_kisa_aciklama)
+        </dd>
+
+        <dt>
+            <label>Ürün Uzun Açıklama</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_uzun_aciklama)
+        </dd>
+
+        <dt>
+            <label>Ürün Stok</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.urun_stok)
+        </dd>
+
+        <dt>
+            <label>Ürün Bakım</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BAKIM.bakim_ad)
+        </dd>
+
+        <dt>
+            <label>Ürün Hammadde</label>
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HAMMADDE.hammadde_ad)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Sil" class="btn btn-default" /> |
+            @Html.ActionLink("Listeye Geri Dön", "Urunler")
+        </div>
+    }
+</div>
+

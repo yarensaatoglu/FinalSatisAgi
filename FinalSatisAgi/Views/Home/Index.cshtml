@@ -1,0 +1,44 @@
+﻿@model IEnumerable<FinalSatisAgi.Models.Entity.URUN>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ÜRÜNLER</h2>
+
+<div class="w_content">
+    <div class="women">
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="women_main">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+
+                    <div class="grid1_of_4">
+                        <div class="content_box" s>
+                            <h4>@Html.DisplayFor(modelItem => item.urun_ad)</h4>
+                            <img src="~/Resim/resim.jpg" class="img-responsive" alt="">
+                            <div class="grid_1 simpleCart_shelfItem">
+
+                                <h6>@Html.DisplayFor(modelItem => item.urun_fiyat) TL</h6>
+                                <form action="/Guvenlik/GirisYap/">
+                                    <div class="item_add">
+                                        <span class="item_price">
+                                            <input type="hidden" name="id" id="id" value="@item.urun_id" style="width:50px;" />
+                                            <input type="submit" id="gonder" value="Sepete Ekle" />
+                                        </span>
+                                    </div>
+                                </form>
+
+                                <a href="#">@Html.ActionLink("Ürün Detayı", "UrunDetay", new { id = item.urun_id }) </a>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+</div>
+
+
