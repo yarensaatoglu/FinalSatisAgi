@@ -221,6 +221,10 @@ namespace FinalSatisAgi.Controllers
             var siparis = db.SIPARIS.ToList();
             return View(siparis);
         }
-
+        public ActionResult SiparisDetay(int id)
+        {
+            var siparisDetay = db.SIPARIS_K.Where(x=>x.siparis_k_siparis_id == id).ToList();
+            return View(siparisDetay);
+        }
     }
 }

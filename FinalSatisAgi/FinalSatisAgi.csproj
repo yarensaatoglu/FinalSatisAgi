@@ -313,6 +313,7 @@
     <Content Include="Views\YoneticiUser\Firma.cshtml" />
     <Content Include="Views\YoneticiUser\Musteri.cshtml" />
     <Content Include="Views\YoneticiUser\Yonetici.cshtml" />
+    <Content Include="Views\Yonetici\SiparisDetay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
