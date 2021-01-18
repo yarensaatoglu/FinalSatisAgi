@@ -95,42 +95,12 @@ namespace FinalSatisAgi.Controllers
             db.SaveChanges();
             return RedirectToAction("Sepet");
         }
-        public ActionResult SiparisTamamla()// Siparis tamamlanır 
+        public ActionResult SiparisTamamla()
         {
             int userID = (int)Session["LoginMusteriId"];
-            SIPARIS siparis = new SIPARIS()
-            {
-                siparis_ad = Request.Form.Get("siparis_ad"), // burada View tarfında girilen bilgiler çekilir
-                siparis_soyad = Request.Form.Get("siparis_soyad"),
-                siparis_adres = Request.Form.Get("siparis_adres"),
-                siparis_tarih = DateTime.Now,
-                siparis_tc= Request.Form.Get("siparis_tc"),
-                siparis_telefon = Request.Form.Get("siparis_telefon"),
-                siparis_user_id = userID
-            };
-
-            IEnumerable<SEPET> sepettekiUrunler = db.SEPET.Where(a => a.sepet_user_id == userID).ToList();
-
-            foreach (SEPET sepetUrunu in sepettekiUrunler)
-            {
-                SIPARIS_K yeniKalem = new SIPARIS_K()
-                {
-                    siparis_adet = sepetUrunu.sepet_adet,
-                    siparis_tutar = sepetUrunu.sepet_tutar,
-                    siparis_k_urun_id = sepetUrunu.sepet_urun_id
-                };
-
-                siparis.SIPARIS_K.Add(yeniKalem);
-
-                db.SEPET.Remove(sepetUrunu);
-            }
-
-            db.SIPARIS.Add(siparis);
-            db.SaveChanges();
-
-            return View();
+            IEnumerable<SEPET> sepetUrunleri = db.SEPET.Where(a => a.sepet_user_id == userID).ToList();
             //Bu kısım 3-d ödeme için yazılmıştır fakat banka bilgisi vs. olmadığı için aktif değildir.
-            /*
+        
             string ClientId = "100300000"; // Bankadan aldığınız mağaza kodu
             string Amount = sepetUrunleri.Sum(a => a.sepet_tutar).ToString(); // sepettteki ürünlerin toplam fiyatı
             string Oid = String.Format("{0:yyyyMMddHHmmss}", DateTime.Now); // sipariş id oluşturuyoruz. her sipariş için farklı olmak zorunda
@@ -163,12 +133,42 @@ namespace FinalSatisAgi.Controllers
             ViewBag.Lang = "tr";
             ViewBag.EMail = "destek@karayeltasarim.com";
             ViewBag.UserID = "karayelapi"; // bu id yi bankanın sanala pos ekranında biz oluşturuyoruz.
-            ViewBag.PostURL = "http://localhost:44388/Firma/Tamamlandi";
-            */
-
+            ViewBag.PostURL = "https://localhost:44388/Musteri/Tamamlandi";
+            return View();
         }
         public ActionResult Tamamlandi() // Ödeme tammalnadığında çalışır.
         {
+            int userID = (int)Session["LoginMusteriId"];
+            SIPARIS siparis = new SIPARIS()
+            {
+                siparis_ad = Request.Form.Get("siparis_ad"), // burada View tarfında girilen bilgiler çekilir
+                siparis_soyad = Request.Form.Get("siparis_soyad"),
+                siparis_adres = Request.Form.Get("siparis_adres"),
+                siparis_tarih = DateTime.Now,
+                siparis_tc= Request.Form.Get("siparis_tc"),
+                siparis_telefon = Request.Form.Get("siparis_telefon"),
+                siparis_user_id = userID
+            };
+
+            IEnumerable<SEPET> sepettekiUrunler = db.SEPET.Where(a => a.sepet_user_id == userID).ToList();
+
+            foreach (SEPET sepetUrunu in sepettekiUrunler)
+            {
+                SIPARIS_K yeniKalem = new SIPARIS_K()
+                {
+                    siparis_adet = sepetUrunu.sepet_adet,
+                    siparis_tutar = sepetUrunu.sepet_tutar,
+                    siparis_k_urun_id = sepetUrunu.sepet_urun_id
+                };
+
+                siparis.SIPARIS_K.Add(yeniKalem);
+
+                db.SEPET.Remove(sepetUrunu);
+            }
+
+            db.SIPARIS.Add(siparis);
+            db.SaveChanges();
+
             return View();
         }
         public ActionResult Siparislerim() // Müşteri kendi siparişlerini listeler

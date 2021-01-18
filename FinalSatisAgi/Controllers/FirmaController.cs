@@ -124,13 +124,55 @@ namespace FinalSatisAgi.Controllers
         public ActionResult SiparisTamamla()
         {
             int userID = (int)Session["LoginFirmaId"];
+            IEnumerable<SEPET> sepetUrunleri = db.SEPET.Where(a => a.sepet_user_id == userID).ToList();
+            //Bu kısım 3-d ödeme için yazılmıştır fakat banka bilgisi vs. olmadığı için aktif değildir.
+
+            string ClientId = "100300000"; // Bankadan aldığınız mağaza kodu
+            string Amount = sepetUrunleri.Sum(a => a.sepet_tutar).ToString(); // sepettteki ürünlerin toplam fiyatı
+            string Oid = String.Format("{0:yyyyMMddHHmmss}", DateTime.Now); // sipariş id oluşturuyoruz. her sipariş için farklı olmak zorunda
+            string OnayURL = "http://localhost:44388/Siparis/Tamamlandi"; // Ödeme tamamlandığında bankadan verilerin geleceği url
+            string HataURL = "http://localhost:44388/Siparis/Hatali"; // Ödeme hata verdiğinde bankadan gelen verilerin gideceği url
+            string RDN = "asdf"; // hash karşılaştırması için eklenen rast gele dizedir
+            string StoreKey = "123456"; // Güvenlik anahtarı bankanın sanal pos sayfasından alıyoruz
+
+
+            string TransActionType = "Auth"; // bu bölüm sabit değişmiyor
+            string Instalment = "";
+            string HashStr = ClientId + Oid + Amount + OnayURL + HataURL + TransActionType + Instalment + RDN + StoreKey; // Hash oluşturmak için bankanın bizden istediği stringleri birleştiriyoruz
+
+            System.Security.Cryptography.SHA1 sha = new System.Security.Cryptography.SHA1CryptoServiceProvider();
+            byte[] HashBytes = System.Text.Encoding.GetEncoding("ISO-8859-9").GetBytes(HashStr);
+            byte[] InputBytes = sha.ComputeHash(HashBytes);
+            string Hash = Convert.ToBase64String(InputBytes);
+
+            ViewBag.ClientId = ClientId;
+            ViewBag.Oid = Oid;
+            ViewBag.okUrl = OnayURL;
+            ViewBag.failUrl = HataURL;
+            ViewBag.TransActionType = TransActionType;
+            ViewBag.RDN = RDN;
+            ViewBag.Hash = Hash;
+            ViewBag.Amount = Amount;
+            ViewBag.StoreType = "3d_pay_hosting"; // Ödeme modelimiz biz buna göre anlatıyoruz 
+            ViewBag.Description = "";
+            ViewBag.XID = "";
+            ViewBag.Lang = "tr";
+            ViewBag.EMail = "destek@karayeltasarim.com";
+            ViewBag.UserID = "karayelapi"; // bu id yi bankanın sanala pos ekranında biz oluşturuyoruz.
+            ViewBag.PostURL = "https://localhost:44388/Firma/Tamamlandi";
+            return View();
+
+        }
+        public ActionResult Tamamlandi()
+        {
+            int userID = (int)Session["LoginFirmaId"];
             SIPARIS siparis = new SIPARIS()
             {
                 siparis_ad = Request.Form.Get("siparis_ad"),
                 siparis_soyad = Request.Form.Get("siparis_soyad"),
                 siparis_adres = Request.Form.Get("siparis_adres"),
                 siparis_tarih = DateTime.Now,
-                siparis_tc= Request.Form.Get("siparis_tc"),
+                siparis_tc = Request.Form.Get("siparis_tc"),
                 siparis_telefon = Request.Form.Get("siparis_telefon"),
                 siparis_user_id = userID
             };
@@ -154,11 +196,6 @@ namespace FinalSatisAgi.Controllers
             db.SIPARIS.Add(siparis);
             db.SaveChanges();
 
-            return View();
-
-        }
-        public ActionResult Tamamlandi()
-        { 
             return View();
         }
         public ActionResult Siparislerim()
