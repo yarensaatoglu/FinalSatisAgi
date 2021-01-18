@@ -118,7 +118,7 @@ namespace FinalSatisAgi.Controllers
         }
         public ActionResult SiparisDetay(int id)
         {
-            var siparisDetay = db.SIPARIS_K.Where(a => a.siparis_k_siparis_id == id).ToList();
+            var siparisDetay = db.SIPARIS_K.Where(a => a.siparis_k_id == id).ToList();
             return View(siparisDetay.ToList());
         }
         public ActionResult SiparisTamamla()
@@ -169,8 +169,8 @@ namespace FinalSatisAgi.Controllers
         }
         public ActionResult SiparisListele()
         {
-            var siparisler = db.SIPARIS.ToList();
-             return View();
+            var siparis = db.SIPARIS.ToList();
+            return View(siparis);
         }
 
     }
