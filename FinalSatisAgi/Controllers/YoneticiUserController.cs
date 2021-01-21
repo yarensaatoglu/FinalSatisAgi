@@ -46,9 +46,28 @@ namespace FinalSatisAgi.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.USER.Add(uSER);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if(uSER.YETKI.yetki_ad == "Firma")
+                {
+                    uSER.user_yetki_id = 2;
+                    db.USER.Add(uSER);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else if(uSER.YETKI.yetki_ad == "Müşteri")
+                {
+                    uSER.user_yetki_id = 3;
+                    db.USER.Add(uSER);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    uSER.user_yetki_id = 1;
+                    db.USER.Add(uSER);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
 
             ViewBag.user_yetki_id = new SelectList(db.YETKI, "yetki_id", "yetki_ad", uSER.user_yetki_id);

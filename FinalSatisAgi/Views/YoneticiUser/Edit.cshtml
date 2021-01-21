@@ -1,5 +1,4 @@
 ﻿@model FinalSatisAgi.Models.Entity.USER
-
 @{
     ViewBag.Title = "Edit";
     Layout = "~/Views/Shared/_YoneticiLayout.cshtml";
@@ -11,7 +10,7 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
+   <div class="form-horizontal">
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     @Html.HiddenFor(model => model.user_id)
